@@ -6,20 +6,17 @@ with st.sidebar:
 
 st.title("Cohere Chatbot")
 
-# Chat history
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "CHATBOT", "message": "Can I help?"}]
 
-# Display history
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["message"])
 
 prompt = st.chat_input()
 
 if prompt:
-
   if not API_KEY:
-    st.info("please add Cohere API Key")
+    st.info("Please enter Cohere API Key")
     st.stop()
 
     client = cohere.Client(API_KEY)
@@ -30,4 +27,4 @@ if prompt:
     msg = response.text
 
     st.session_state.messages.append({"role": "CHATBOT", "message": msg})
-    st.chat_message("ChatBOT".write(msg))
+    st.chat_message("CHATBOT").write(msg)
